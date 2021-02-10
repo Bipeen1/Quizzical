@@ -19,6 +19,15 @@
         android:icon="@drawable/ic_history"
         android:title="User's History"/>
     <item
+        android:id="@+id/add_question"
+        android:icon="@drawable/ic_add_question"
+        android:title="Add Question"/>
+    <item
+        android:id="@+id/add_subject"
+        android:icon="@drawable/ic_add_subject"
+        android:title="Add Subject"/>
+
+    <item
         android:id="@+id/logout"
         android:icon="@drawable/ic_logout"
         android:title="Logout"/>

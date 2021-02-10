@@ -36,6 +36,12 @@ public class PreferenceHelper {
         return QUIZ_PREFERENCE.getString(key,"");
     }
 
+    public void clearPreferences(){
+        SharedPreferences.Editor editor1=QUIZ_PREFERENCE.edit();
+        editor1.clear();
+        editor1.apply();
+    }
+
     public void putBoolean(String key,boolean defaultvalue){
         SharedPreferences.Editor editor = QUIZ_PREFERENCE.edit();
         editor.putBoolean(key, defaultvalue);

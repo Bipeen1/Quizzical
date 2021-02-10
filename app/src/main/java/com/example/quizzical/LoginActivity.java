@@ -122,24 +122,41 @@ public class LoginActivity extends BaseActivity {
             reference.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                    boolean isSuccessful=false;
                     for (DataSnapshot dataSnapshot1 : snapshot.getChildren()) {
                         if (dataSnapshot1.getValue() != null && dataSnapshot1.child("email").getValue().toString().equalsIgnoreCase(emailStr)
                                 && dataSnapshot1.child("password").getValue().toString().equals(passwordStr)) {
 
+
+                            Log.d(TAG, "onDataChange: Inside OnData Change if condition");
                             baseActivityPreferenceHelper.putBoolean(Constants.PREF_LOGIN, true);
                             baseActivityPreferenceHelper.putString(Constants.PREF_EMAIL, emailStr);
                             baseActivityPreferenceHelper.putString(Constants.PREF_PASSWORD, passwordStr);
 
-                            Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
+                            isSuccessful=true;
+
                             Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             startActivity(intent);
                             finish();
+                            break;
 
                         }
                         else {
-                            Toast.makeText(LoginActivity.this, "Email or Password is Incorrect!!!", Toast.LENGTH_SHORT).show();
+                            isSuccessful=false;
+                            Log.d(TAG, "onDataChange: Inside OnData Change else condition");
                         }
+                    }
+                    if(isSuccessful){
+                        //Toast.makeText(LoginActivity.this, "Email or Password is Incorrect!!!", Toast.LENGTH_SHORT).show();
+
+                        Toast.makeText(getApplicationContext(), "Login Successful", Toast.LENGTH_SHORT).show();
+                    }else{
+                        //Toast.makeText(LoginActivity.this, "Email or Password is Incorrect!!!", Toast.LENGTH_SHORT).show();
+
+                        Toast.makeText(getApplicationContext(), "Email or Password is Incorrect!!!", Toast.LENGTH_SHORT).show();
+
                     }
                 }
 
