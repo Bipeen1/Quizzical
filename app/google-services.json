@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "279560735128",
+    "project_id": "quizzical-10b86",
+    "storage_bucket": "quizzical-10b86.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:279560735128:android:75ee06d736dcc1557743ed",
+        "android_client_info": {
+          "package_name": "com.example.quizzical"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "279560735128-8m7a82ga6l2fl9e598a0gcl9duisesng.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCdbEhyo9LNL1vT4JgcVH_F5JWFZ0kdhio"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "279560735128-8m7a82ga6l2fl9e598a0gcl9duisesng.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

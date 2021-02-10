@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">Quizzical</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="login">Login</string>
+    <string name="create_new">Click here for register</string>
+    <string name="not_register">Not Register?</string>
+    <string name="name">Name</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="register">Register</string>
+    <string name="name_error">Please enter your name</string>
+    <string name="phone_error">Please enter your phone number</string>
+    <string name="email_error">Please enter your email address</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="password_error">Please enter a password</string>
+    <string name="Confirm_password_error"> password does not match</string>
+    <string name="error_invalid_password">Please enter a minimum password of 6 characters</string>
+    <string name="password_confirm">Password Does Not Match!!!</string>
+    <string name="confirm_passwod_error">Please Enter Confirm Password</string>
+    <string name="full_name">Full Name</string>
+    <string name="password">Password</string>
+    <string name="confirm_passoword">Confirm Passoword</string>
+    <string name="already_registered_login">Already registered? login</string>
+    <string name="register_button">register</string>
+    <string name="email">Email</string>
+    <string name="welcome_to_home_page">Welcome to Home Page</string>
+    <string name="logout">Logout</string>
+    <string name="navigation_drawer_open">open navigation drawer</string>
+    <string name="navigation_drawer_close">close navigation drawer</string>
+</resources>
