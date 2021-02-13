@@ -22,13 +22,14 @@ public class SubjectToBeAdd extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_subject_to_be);
-
+        this.setTitle("Add Subject");
         addSubject = (Button) findViewById(R.id.submit_subject);
         subjectName = (EditText) findViewById(R.id.subject_name);
 
         addSubject.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 String subject = subjectName.getText().toString().trim();
                 rootNode = FirebaseDatabase.getInstance();
                 reference = rootNode.getReference("Subjects");
@@ -36,6 +37,7 @@ public class SubjectToBeAdd extends AppCompatActivity {
                 Toast.makeText(SubjectToBeAdd.this, "subject Added", Toast.LENGTH_SHORT).show();
                 subjectName.setText("");
                 finish();
+
             }
         });
     }

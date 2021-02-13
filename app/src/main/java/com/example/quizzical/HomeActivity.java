@@ -78,11 +78,13 @@ public class HomeActivity extends BaseActivity {
                     case R.id.add_subject:
                         AddSubjectFragment addSubjectFragment = new AddSubjectFragment();
                         replaceFragment(addSubjectFragment);
+                        toolbar.setTitle("Subjects");
                         break;
 
                     case R.id.add_question:
                         AddQuestionFragment addQuestionFragment = new AddQuestionFragment();
                         replaceFragment(addQuestionFragment);
+                        toolbar.setTitle("Question");
                         break;
 
                     case R.id.logout:

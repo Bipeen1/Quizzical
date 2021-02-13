@@ -3,6 +3,7 @@
     package="com.example.quizzical">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -15,7 +16,9 @@
         android:theme="@style/Theme.Quizzical">
         <activity android:name=".SubjectToBeAdd"></activity>
         <activity android:name=".BaseActivity" />
-        <activity android:name=".SplashActivity">
+        <activity
+            android:name=".SplashActivity"
+            android:theme="@style/Theme.Quizzical.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

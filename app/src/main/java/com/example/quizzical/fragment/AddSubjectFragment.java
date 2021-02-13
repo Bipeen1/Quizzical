@@ -2,14 +2,18 @@ package com.example.quizzical.fragment;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -32,19 +36,42 @@ import static android.content.ContentValues.TAG;
 public class AddSubjectFragment extends Fragment {
     FloatingActionButton floatingActionButton;
     ListView myListView;
-
     DatabaseReference subjectRef;
-
     ArrayList<String> myArrayList = new ArrayList<>();
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.add_subject_fragment, container, false);
+
         floatingActionButton = view.findViewById(R.id.fab);
         myListView = view.findViewById(R.id.listview1);
         ArrayAdapter<String> myArrayAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, myArrayList);
         myListView.setAdapter(myArrayAdapter);
+
+        myListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                int which_item = position;
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                builder.setIcon(android.R.drawable.ic_delete);
+                builder.setTitle("Are you sure ?");
+                builder.setMessage("Do you want to delete this subject ?");
+                builder.setPositiveButton("yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        String arr = myArrayList.remove(which_item);
+                        subjectRef = FirebaseDatabase.getInstance().getReference("Subjects").child(arr);
+                        subjectRef.removeValue();
+                        myArrayAdapter.notifyDataSetChanged();
+                        Toast.makeText(getContext(), arr + " Subject deleted", Toast.LENGTH_SHORT).show();
+                    }
+                });
+                builder.setNegativeButton("No", null);
+                builder.show();
+                return true;
+            }
+        });
 
         subjectRef = FirebaseDatabase.getInstance().getReference("Subjects");
         subjectRef.addChildEventListener(new ChildEventListener() {
@@ -62,7 +89,7 @@ public class AddSubjectFragment extends Fragment {
 
             @Override
             public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-
+                myArrayAdapter.notifyDataSetChanged();
             }
 
             @Override
@@ -84,7 +111,6 @@ public class AddSubjectFragment extends Fragment {
             }
         });
         return view;
-
     }
 
 
