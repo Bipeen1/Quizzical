@@ -34,11 +34,17 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 AddSubjectFragment addSubjectFragment = new AddSubjectFragment();
+                Bundle bundle=new Bundle();
+                bundle.putString("FROM_SCREEN", "ADD_SUBJECT");
+                //set Fragmentclass Arguments
+                addSubjectFragment.setArguments(bundle);
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.fragment_container, addSubjectFragment);
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
+
+
 
             }
         });
@@ -46,12 +52,19 @@ public class HomeFragment extends Fragment {
             @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @Override
             public void onClick(View v) {
-                AddQuestionFragment addQuestionFragment = new AddQuestionFragment();
+                AddSubjectFragment addSubjectFragment = new AddSubjectFragment();
+                Bundle bundle=new Bundle();
+                bundle.putString("FROM_SCREEN", "ADD_QUESTION");
+                //set Fragmentclass Arguments
+                addSubjectFragment.setArguments(bundle);
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.fragment_container, addQuestionFragment);
+                fragmentTransaction.replace(R.id.fragment_container, addSubjectFragment);
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
+
+
+
 //                toolbar.setTitle("Add Question");
             }
         });

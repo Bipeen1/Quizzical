@@ -14,7 +14,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Quizzical">
-        <activity android:name=".SubjectToBeAdd"></activity>
+        <activity android:name=".SubjectListActivity"></activity>
+        <activity android:name=".QuestionToBeAdded" />
+        <activity android:name=".SubjectToBeAdd" />
         <activity android:name=".BaseActivity" />
         <activity
             android:name=".SplashActivity"

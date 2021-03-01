@@ -29,15 +29,13 @@ public class SubjectToBeAdd extends AppCompatActivity {
         addSubject.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 String subject = subjectName.getText().toString().trim();
                 rootNode = FirebaseDatabase.getInstance();
-                reference = rootNode.getReference("Subjects");
-                reference.child(subject).setValue(subject);
+                reference = rootNode.getReference("QuestionBank").child("Subjects");
+                reference.child(subject).child("value").setValue(subject);//bipi ncode
                 Toast.makeText(SubjectToBeAdd.this, "subject Added", Toast.LENGTH_SHORT).show();
                 subjectName.setText("");
                 finish();
-
             }
         });
     }

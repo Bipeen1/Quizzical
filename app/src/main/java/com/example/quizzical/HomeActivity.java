@@ -11,6 +11,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.quizzical.fragment.AddQuestionFragment;
@@ -18,7 +20,13 @@ import com.example.quizzical.fragment.AddSubjectFragment;
 import com.example.quizzical.fragment.GiveTestFragment;
 import com.example.quizzical.fragment.HomeFragment;
 import com.example.quizzical.fragment.UserHistoryFragment;
+import com.example.quizzical.util.Constants;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class HomeActivity extends BaseActivity {
 //    Button btnLogout;
@@ -27,6 +35,7 @@ public class HomeActivity extends BaseActivity {
     ActionBarDrawerToggle toggle;
     DrawerLayout drawer;
     NavigationView navigationView;
+    DatabaseReference reference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,8 +104,8 @@ public class HomeActivity extends BaseActivity {
                 return true;
             }
         });
-
-
+// Updates the navigation header in the menu bar
+        updateNavHeader();
 //        btnLogout.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
@@ -112,6 +121,32 @@ public class HomeActivity extends BaseActivity {
         } else {
             super.onBackPressed();
         }
+    }
+
+    public void updateNavHeader() {
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        View headerView = navigationView.getHeaderView(0);
+        TextView navUserName = headerView.findViewById(R.id.name_header_title);
+        TextView navUserEmail = headerView.findViewById(R.id.email_header_title);
+        String email=baseActivityPreferenceHelper.getString(Constants.PREF_EMAIL,"No Email Id");
+        navUserEmail.setText(email);
+//        reference = FirebaseDatabase.getInstance().getReference("Users").child();
+//        reference.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                if (snapshot.getValue() != null) {
+//                    String email = snapshot.getValue(String.class);
+//                    String name = snapshot.getValue(String.class);
+//                    navUserEmail.setText(email);
+//                    navUserName.setText(name);
+//                }
+//            }
+
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
     }
 
     @Override
