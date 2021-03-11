@@ -1,12 +1,12 @@
 package com.example.quizzical;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -32,7 +32,7 @@ public class SubjectToBeAdd extends AppCompatActivity {
                 String subject = subjectName.getText().toString().trim();
                 rootNode = FirebaseDatabase.getInstance();
                 reference = rootNode.getReference("QuestionBank").child("Subjects");
-                reference.child(subject).child("value").setValue(subject);//bipi ncode
+                reference.child(subject).setValue(subject);//bipi ncode
                 Toast.makeText(SubjectToBeAdd.this, "subject Added", Toast.LENGTH_SHORT).show();
                 subjectName.setText("");
                 finish();

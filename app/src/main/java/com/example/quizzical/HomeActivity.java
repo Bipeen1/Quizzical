@@ -1,19 +1,18 @@
 package com.example.quizzical;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
-
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.os.Bundle;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.quizzical.fragment.AddQuestionFragment;
 import com.example.quizzical.fragment.AddSubjectFragment;
@@ -128,26 +127,26 @@ public class HomeActivity extends BaseActivity {
         View headerView = navigationView.getHeaderView(0);
         TextView navUserName = headerView.findViewById(R.id.name_header_title);
         TextView navUserEmail = headerView.findViewById(R.id.email_header_title);
-        String email=baseActivityPreferenceHelper.getString(Constants.PREF_EMAIL,"No Email Id");
+        String email = baseActivityPreferenceHelper.getString(Constants.PREF_EMAIL, "No Email Id");
         navUserEmail.setText(email);
-//        reference = FirebaseDatabase.getInstance().getReference("Users").child();
-//        reference.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                if (snapshot.getValue() != null) {
-//                    String email = snapshot.getValue(String.class);
-//                    String name = snapshot.getValue(String.class);
-//                    navUserEmail.setText(email);
-//                    navUserName.setText(name);
-//                }
-//            }
+        String nameSubString = email.substring(0, email.lastIndexOf("@"));
+        reference = FirebaseDatabase.getInstance().getReference("Users").child(nameSubString);
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.getValue() != null) {
+                    String name = snapshot.child("name").getValue(String.class);
+                    navUserName.setText(name);
+                }
+            }
 
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        });
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
+
 
     @Override
     protected void init() {

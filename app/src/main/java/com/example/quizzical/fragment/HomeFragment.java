@@ -1,13 +1,11 @@
 package com.example.quizzical.fragment;
 
-import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toolbar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,14 +17,17 @@ import androidx.fragment.app.FragmentTransaction;
 import com.example.quizzical.R;
 
 public class HomeFragment extends Fragment {
-    Button addSubject, addQuestion;
-//Toolbar toolbar;
+    Button addSubject, addQuestion, giveTest;
+
+    //Toolbar toolbar;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.home_screen_fragment, container, false);
         addSubject = view.findViewById(R.id.add_subject);
         addQuestion = view.findViewById(R.id.add_question);
+        giveTest = view.findViewById(R.id.give_test);
         //toolbar=view.findViewById(R.id.toolbar);
 
         addSubject.setOnClickListener(new View.OnClickListener() {
@@ -62,10 +63,19 @@ public class HomeFragment extends Fragment {
                 fragmentTransaction.replace(R.id.fragment_container, addSubjectFragment);
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
-
-
-
 //                toolbar.setTitle("Add Question");
+            }
+        });
+
+        giveTest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                GiveTestFragment giveTestFragment = new GiveTestFragment();
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.fragment_container, giveTestFragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
             }
         });
         return view;

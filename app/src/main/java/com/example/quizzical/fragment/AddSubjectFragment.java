@@ -17,7 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.example.quizzical.QuestionToBeAdded;
+import com.example.quizzical.QuestionList;
 import com.example.quizzical.R;
 import com.example.quizzical.SubjectToBeAdd;
 import com.example.quizzical.util.Constants;
@@ -31,11 +31,12 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 public class AddSubjectFragment extends Fragment {
+
     FloatingActionButton floatingActionButton;
     ListView myListView;
     DatabaseReference subjectRef;
     ArrayList<String> myArrayList = new ArrayList<>();
-
+    public String itemSelect;
     Context context;
     @Nullable
     @Override
@@ -66,8 +67,9 @@ public class AddSubjectFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String selectedItem = (String) parent.getItemAtPosition(position);
+                itemSelect = selectedItem;
                 Toast.makeText(context, "You have selected " + selectedItem, Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(context, QuestionToBeAdded.class);
+                Intent intent = new Intent(context, QuestionList.class);
                 intent.putExtra("SUBJECT_SELECTED", selectedItem);
                 startActivity(intent);
             }
@@ -99,36 +101,7 @@ public class AddSubjectFragment extends Fragment {
         });
 
 
-//        subjectRef = FirebaseDatabase.getInstance().getReference("QuestionBank").child("Subjects");
-//        subjectRef.addChildEventListener(new ChildEventListener() {
-//            @Override
-//            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-//                String value = snapshot.getValue(String.class);
-//                myArrayList.add(value);
-//                myArrayAdapter.notifyDataSetChanged();
-//            }
 //
-//            @Override
-//            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-//                myArrayAdapter.notifyDataSetChanged();
-//            }
-//
-//            @Override
-//            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-//                myArrayAdapter.notifyDataSetChanged();
-//            }
-//
-//            @Override
-//            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-//
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        });
-
 
         subjectRef = FirebaseDatabase.getInstance().getReference(Constants.questionBank).child(Constants.subjects);
         subjectRef.addValueEventListener(new ValueEventListener() {
